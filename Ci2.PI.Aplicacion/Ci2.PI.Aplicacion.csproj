@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E4D3DB44-05D2-4CE9-8AA4-2DB815FD137F}</ProjectGuid>
+    <ProjectGuid>{BFA8D83D-FAF8-4B4E-8BD3-7A59E3EDE38F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ci2.PI.Persistencia</RootNamespace>
-    <AssemblyName>Ci2.PI.Persistencia</AssemblyName>
+    <RootNamespace>Ci2.PI.Aplicacion</RootNamespace>
+    <AssemblyName>Ci2.PI.Aplicacion</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modelo\" />
+    <ProjectReference Include="..\Ci2.PI.Persistencia\Ci2.PI.Persistencia.csproj">
+      <Project>{e4d3db44-05d2-4ce9-8aa4-2db815fd137f}</Project>
+      <Name>Ci2.PI.Persistencia</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositorios\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

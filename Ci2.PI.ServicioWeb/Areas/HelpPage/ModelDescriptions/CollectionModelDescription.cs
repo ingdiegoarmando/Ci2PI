@@ -1,0 +1,7 @@
+namespace Ci2.PI.ServicioWeb.Areas.HelpPage.ModelDescriptions
+{
+    public class CollectionModelDescription : ModelDescription
+    {
+        public ModelDescription ElementDescription { get; set; }
+    }
+}
