@@ -14,7 +14,7 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
     {
         private TabTarea GenerarTarea()
         {
-            var fecha = DateTime.Now;
+            var fecha = DateTime.Now;            
 
             return new TabTarea()
             {
@@ -22,6 +22,7 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
                 Ci2EstadoTareaId = 1,
                 Ci2FechaCreacion = fecha,
                 Ci2UsuarioId = "852c89ca-b7a8-4423-84af-2f6fac9a4004",
+                //Ci2UsuarioId = "8579920e-0c6b-4a74-aa34-2ac1fdffca69",
             };
         }
 
@@ -39,7 +40,7 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
             using (var db = new Ci2PIBDEntidades())
             {
                 var repositorio = new TareRepositorio(db);
-                return  repositorio.ConsultarPorId(id);
+                return repositorio.ConsultarPorId(id);
             }
         }
 
@@ -61,12 +62,12 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
 
             AgregarOActualizarTarea(tarea);
 
-            TabTarea tareaDeBaseDeDatos = ConsultarTareaPorId(tarea.Ci2TareaId);            
+            TabTarea tareaDeBaseDeDatos = ConsultarTareaPorId(tarea.Ci2TareaId);
 
             var fecha = DateTime.Now;
             tareaDeBaseDeDatos.Ci2FechaCreacion = fecha;
 
-            AgregarOActualizarTarea(tareaDeBaseDeDatos);            
+            AgregarOActualizarTarea(tareaDeBaseDeDatos);
 
             tareaDeBaseDeDatos = ConsultarTareaPorId(tarea.Ci2TareaId);
 
@@ -86,7 +87,7 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
 
             Assert.AreNotEqual(tareaDeBaseDeDatos, null);
             Assert.AreEqual(tareaDeBaseDeDatos.Ci2TareaId, tarea.Ci2TareaId);
-            Assert.AreEqual(tareaDeBaseDeDatos.Ci2Descripcion, tarea.Ci2Descripcion);            
+            Assert.AreEqual(tareaDeBaseDeDatos.Ci2Descripcion, tarea.Ci2Descripcion);
         }
 
         [TestMethod()]
@@ -104,7 +105,7 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
 
             var tareaDeBaseDeDatos = ConsultarTareaPorId(tarea.Ci2TareaId);
 
-            Assert.AreEqual(tareaDeBaseDeDatos, null);            
+            Assert.AreEqual(tareaDeBaseDeDatos, null);
         }
 
         [TestMethod()]

@@ -7,6 +7,23 @@ using System.Threading.Tasks;
 
 namespace Ci2.PI.Aplicacion.Repositorios
 {
+    public class ResultadoTareaConsultarPorFiltro
+    {
+        public long Ci2TareaId { get; set; }
+        public System.DateTime Ci2FechaCreacion { get; set; }
+        public string Ci2Descripcion { get; set; }
+        public long Ci2EstadoTareaId { get; set; }
+        public string Ci2UsuarioId { get; set; }
+        public string Ci2NombreUsuario { get; set; }
+    }
+
+    public class FiltroConsultarTarea
+    {
+        public string UsuarioId { get; set; }
+
+        public long EstadoId { get; set; }
+    }
+
     public class TareRepositorio : IRepositorio<TabTarea>
     {
         private Ci2PIBDEntidades ContextoBD { get; set; }
@@ -49,7 +66,7 @@ namespace Ci2.PI.Aplicacion.Repositorios
             {
                 return null;
             }
-            
+
         }
 
         public void Eliminar(params object[] id)
@@ -64,18 +81,55 @@ namespace Ci2.PI.Aplicacion.Repositorios
             var listado = new List<TabTarea>();
             if (resultadoBaseDeDatos != null && resultadoBaseDeDatos.Count > 0)
             {
-                listado = resultadoBaseDeDatos.Select(item=> new TabTarea() {
-                    Ci2Descripcion=item.Ci2Descripcion,
+                listado = resultadoBaseDeDatos.Select(item => new TabTarea()
+                {
+                    Ci2Descripcion = item.Ci2Descripcion,
                     Ci2EstadoTareaId = item.Ci2EstadoTareaId,
                     Ci2FechaCreacion = item.Ci2FechaCreacion,
                     Ci2TareaId = item.Ci2TareaId,
-                    Ci2UsuarioId = item.Ci2UsuarioId,                    
+                    Ci2UsuarioId = item.Ci2UsuarioId,
                 }).ToList();
             }
 
             return listado;
         }
         #endregion
+
+        public IEnumerable<ResultadoTareaConsultarPorFiltro> ConsultarPorFiltro(FiltroConsultarTarea filtro)
+        {
+            var consultaBD = Listar();
+
+            if (filtro.EstadoId != 0)
+            {
+                consultaBD = consultaBD.Where(item => item.Ci2EstadoTareaId == filtro.EstadoId);
+            }
+
+            if (filtro.UsuarioId != null)
+            {
+                consultaBD = consultaBD.Where(item => item.Ci2UsuarioId == filtro.UsuarioId);
+            }
+
+
+            var resultado = new List<ResultadoTareaConsultarPorFiltro>();
+
+
+            foreach (var tarea in consultaBD)
+            {
+                resultado.Add(new ResultadoTareaConsultarPorFiltro()
+                {
+                    Ci2Descripcion = tarea.Ci2Descripcion,
+                    Ci2EstadoTareaId = tarea.Ci2EstadoTareaId,
+                    Ci2FechaCreacion = tarea.Ci2FechaCreacion,
+                    Ci2NombreUsuario = tarea.Ci2UsuarioId,
+                    Ci2TareaId = tarea.Ci2TareaId,
+                    Ci2UsuarioId = tarea.Ci2UsuarioId,
+                });                
+                
+            }
+
+            return resultado;
+        }
+
 
     }
 }

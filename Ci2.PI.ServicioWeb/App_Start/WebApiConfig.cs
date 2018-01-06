@@ -5,6 +5,10 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using Ci2.PI.ServicioWeb.Infraestructura.Binders;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.ModelBinding.Binders;
+using System.Web.Http.ValueProviders;
 
 namespace Ci2.PI.ServicioWeb
 {
@@ -25,6 +29,9 @@ namespace Ci2.PI.ServicioWeb
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Custom ValueProvider
+            config.Services.Add(typeof(ValueProviderFactory), new NombreDeUsuarioActualValueProviderFactory());
         }
     }
 }
