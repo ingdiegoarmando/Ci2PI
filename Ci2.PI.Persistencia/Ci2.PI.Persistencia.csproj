@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,10 +51,78 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelo\Ci2.PI.BD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Ci2.PI.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ci2.PI.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Ci2.PI.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\C__MigrationHistory.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\PraTabTareaConsultarPorId_Result.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\PraTabTareaListar_Result.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\TabEstadoTarea.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\TabRol.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\TabTarea.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\TabUsuario.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\TabUsuarioClaim.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\TabUsuarioLogin.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Modelo\" />
+    <EntityDeploy Include="Modelo\Ci2.PI.BD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ci2.PI.BD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Modelo\Ci2.PI.BD.edmx.diagram">
+      <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Modelo\Ci2.PI.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
+      <LastGenOutput>Ci2.PI.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Modelo\Ci2.PI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
+      <LastGenOutput>Ci2.PI.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
