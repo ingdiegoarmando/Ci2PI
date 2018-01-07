@@ -18,7 +18,8 @@ namespace Ci2.PI.ServicioWeb.Infraestructura.Binders
 
         public NombreDeUsuarioActualValueProvider(HttpActionContext actionContext)
         {
-            nombreDeUsuarioActual = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+            //Este código es temporal y debe ser eliminado una vez se implemente sistema de autenticación.
+            nombreDeUsuarioActual = "a@a.com";
         }
 
         public bool EsUnCampoValido(string campo) {

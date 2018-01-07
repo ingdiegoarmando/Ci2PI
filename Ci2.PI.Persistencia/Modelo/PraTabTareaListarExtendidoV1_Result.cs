@@ -10,18 +10,16 @@
 namespace Ci2.PI.Persistencia.Modelo
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TabTarea
+    public partial class PraTabTareaListarExtendidoV1_Result
     {
         public long Ci2TareaId { get; set; }
         public System.DateTime Ci2FechaCreacion { get; set; }
         public string Ci2Descripcion { get; set; }
-        public long Ci2EstadoTareaId { get; set; }
+        public Nullable<long> Ci2EstadoTareaId { get; set; }
+        public string Ci2NombreEstadoTarea { get; set; }
         public string Ci2UsuarioId { get; set; }
+        public string Ci2NombreUsuario { get; set; }
         public System.DateTime Ci2FechaVencimiento { get; set; }
-    
-        public virtual TabEstadoTarea TabEstadoTarea { get; set; }
-        public virtual TabUsuario TabUsuario { get; set; }
     }
 }

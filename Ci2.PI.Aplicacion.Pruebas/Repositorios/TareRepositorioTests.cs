@@ -14,13 +14,15 @@ namespace Ci2.PI.Aplicacion.Repositorios.Tests
     {
         private TabTarea GenerarTarea()
         {
-            var fecha = DateTime.Now;            
+            var fecha = DateTime.Now;
+            var fechaVencimiento = fecha.AddDays(7);
 
             return new TabTarea()
             {
                 Ci2Descripcion = $"Algo interesante pasó el {fecha}",
                 Ci2EstadoTareaId = 1,
                 Ci2FechaCreacion = fecha,
+                Ci2FechaVencimiento = fechaVencimiento,
                 Ci2UsuarioId = "852c89ca-b7a8-4423-84af-2f6fac9a4004",
                 //Ci2UsuarioId = "8579920e-0c6b-4a74-aa34-2ac1fdffca69",
             };

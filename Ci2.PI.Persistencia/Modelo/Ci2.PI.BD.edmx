@@ -38,6 +38,7 @@
           <Property Name="Ci2Descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Ci2EstadoTareaId" Type="bigint" Nullable="false" />
           <Property Name="Ci2UsuarioId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Ci2FechaVencimiento" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TabUsuario">
           <Key>
@@ -169,6 +170,7 @@
           <Parameter Name="Ci2Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="Ci2EstadoTareaId" Type="bigint" Mode="In" />
           <Parameter Name="Ci2UsuarioId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ci2FechaVencimiento" Type="datetime" Mode="In" />
         </Function>
         <Function Name="PraTabTareaConsultarPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner">
           <Parameter Name="Ci2TareaId" Type="bigint" Mode="In" />
@@ -177,6 +179,7 @@
           <Parameter Name="Ci2TareaId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="PraTabTareaListar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner" />
+        <Function Name="PraTabTareaListarExtendidoV1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner" />
         <EntityContainer Name="Ci2PIBDModeloStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="db_ci2pi_owner" store:Type="Tables" />
           <EntitySet Name="TabEstadoTarea" EntityType="Self.TabEstadoTarea" Schema="db_ci2pi_owner" store:Type="Tables" />
@@ -251,6 +254,7 @@
           <Property Name="Ci2Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Ci2EstadoTareaId" Type="Int64" Nullable="false" />
           <Property Name="Ci2UsuarioId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ci2FechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="TabEstadoTarea" Relationship="Self.FK_TabTarea_TabEstadoTarea" FromRole="TabTarea" ToRole="TabEstadoTarea" />
           <NavigationProperty Name="TabUsuario" Relationship="Self.FK_TabTarea_TabUsuario" FromRole="TabTarea" ToRole="TabUsuario" />
         </EntityType>
@@ -386,6 +390,7 @@
             <Parameter Name="Ci2Descripcion" Mode="In" Type="String" />
             <Parameter Name="Ci2EstadoTareaId" Mode="In" Type="Int64" />
             <Parameter Name="Ci2UsuarioId" Mode="In" Type="String" />
+            <Parameter Name="Ci2FechaVencimiento" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="PraTabTareaConsultarPorId" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabTareaConsultarPorId_Result)">
             <Parameter Name="Ci2TareaId" Mode="In" Type="Int64" />
@@ -394,6 +399,7 @@
             <Parameter Name="Ci2TareaId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="PraTabTareaListar" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabTareaListar_Result)" />
+          <FunctionImport Name="PraTabTareaListarExtendidoV1" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabTareaListarExtendidoV1_Result)" />
         </EntityContainer>
         <ComplexType Name="PraTabTareaConsultarPorId_Result">
           <Property Type="Int64" Name="Ci2TareaId" Nullable="false" />
@@ -401,6 +407,7 @@
           <Property Type="String" Name="Ci2Descripcion" Nullable="false" MaxLength="1000" />
           <Property Type="Int64" Name="Ci2EstadoTareaId" Nullable="false" />
           <Property Type="String" Name="Ci2UsuarioId" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="Ci2FechaVencimiento" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="PraTabTareaListar_Result">
           <Property Type="Int64" Name="Ci2TareaId" Nullable="false" />
@@ -408,6 +415,17 @@
           <Property Type="String" Name="Ci2Descripcion" Nullable="false" MaxLength="1000" />
           <Property Type="Int64" Name="Ci2EstadoTareaId" Nullable="false" />
           <Property Type="String" Name="Ci2UsuarioId" Nullable="false" MaxLength="128" />
+          <Property Type="DateTime" Name="Ci2FechaVencimiento" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="PraTabTareaListarExtendidoV1_Result">
+          <Property Type="Int64" Name="Ci2TareaId" Nullable="false" />
+          <Property Type="DateTime" Name="Ci2FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Ci2Descripcion" Nullable="false" MaxLength="1000" />
+          <Property Type="Int64" Name="Ci2EstadoTareaId" Nullable="true" />
+          <Property Type="String" Name="Ci2NombreEstadoTarea" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Ci2UsuarioId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Ci2NombreUsuario" Nullable="true" MaxLength="256" />
+          <Property Type="DateTime" Name="Ci2FechaVencimiento" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -449,6 +467,7 @@
                 <ScalarProperty Name="Ci2Descripcion" ColumnName="Ci2Descripcion" />
                 <ScalarProperty Name="Ci2EstadoTareaId" ColumnName="Ci2EstadoTareaId" />
                 <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
+                <ScalarProperty Name="Ci2FechaVencimiento" ColumnName="Ci2FechaVencimiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -506,6 +525,7 @@
                 <ScalarProperty Name="Ci2Descripcion" ColumnName="Ci2Descripcion" />
                 <ScalarProperty Name="Ci2EstadoTareaId" ColumnName="Ci2EstadoTareaId" />
                 <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
+                <ScalarProperty Name="Ci2FechaVencimiento" ColumnName="Ci2FechaVencimiento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -518,6 +538,21 @@
                 <ScalarProperty Name="Ci2Descripcion" ColumnName="Ci2Descripcion" />
                 <ScalarProperty Name="Ci2EstadoTareaId" ColumnName="Ci2EstadoTareaId" />
                 <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
+                <ScalarProperty Name="Ci2FechaVencimiento" ColumnName="Ci2FechaVencimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PraTabTareaListarExtendidoV1" FunctionName="Ci2.PI.BD.Modelo.Store.PraTabTareaListarExtendidoV1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ci2.PI.BD.Modelo.PraTabTareaListarExtendidoV1_Result">
+                <ScalarProperty Name="Ci2TareaId" ColumnName="Ci2TareaId" />
+                <ScalarProperty Name="Ci2FechaCreacion" ColumnName="Ci2FechaCreacion" />
+                <ScalarProperty Name="Ci2Descripcion" ColumnName="Ci2Descripcion" />
+                <ScalarProperty Name="Ci2EstadoTareaId" ColumnName="Ci2EstadoTareaId" />
+                <ScalarProperty Name="Ci2NombreEstadoTarea" ColumnName="Ci2NombreEstadoTarea" />
+                <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
+                <ScalarProperty Name="Ci2NombreUsuario" ColumnName="Ci2NombreUsuario" />
+                <ScalarProperty Name="Ci2FechaVencimiento" ColumnName="Ci2FechaVencimiento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -21,10 +21,10 @@ namespace Ci2.PI.ServicioWeb.Controllers
             switch (filtro.Autoria)
             {
                 case Autoria.TodosLosAutores:
-                    filtroBD.UsuarioId = null;
+                    filtroBD.NombreUsuario = null;
                     break;
                 case Autoria.Propia:
-                    filtroBD.UsuarioId = nombreDeUsuarioActual;
+                    filtroBD.NombreUsuario = nombreDeUsuarioActual;
                     break;
                 default:
                     throw new NotSupportedException($"La autoria = {filtro.Autoria} no es soportado");

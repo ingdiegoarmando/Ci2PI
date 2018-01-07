@@ -18,5 +18,6 @@ namespace Ci2.PI.Persistencia.Modelo
         public string Ci2Descripcion { get; set; }
         public long Ci2EstadoTareaId { get; set; }
         public string Ci2UsuarioId { get; set; }
+        public System.DateTime Ci2FechaVencimiento { get; set; }
     }
 }

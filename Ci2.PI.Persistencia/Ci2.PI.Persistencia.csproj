@@ -72,6 +72,9 @@
     <Compile Include="Modelo\PraTabTareaConsultarPorId_Result.cs">
       <DependentUpon>Ci2.PI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\PraTabTareaListarExtendidoV1_Result.cs">
+      <DependentUpon>Ci2.PI.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelo\PraTabTareaListar_Result.cs">
       <DependentUpon>Ci2.PI.tt</DependentUpon>
     </Compile>
@@ -95,20 +98,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EntityDeploy Include="Modelo\Ci2.PI.BD.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Ci2.PI.BD.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="Modelo\Ci2.PI.BD.edmx.diagram">
-      <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Modelo\Ci2.PI.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -120,6 +109,17 @@
       <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
       <LastGenOutput>Ci2.PI.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Modelo\Ci2.PI.BD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ci2.PI.BD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Modelo\Ci2.PI.BD.edmx.diagram">
+      <DependentUpon>Ci2.PI.BD.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

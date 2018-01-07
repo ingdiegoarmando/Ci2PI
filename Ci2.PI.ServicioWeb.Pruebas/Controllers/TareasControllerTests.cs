@@ -12,12 +12,17 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
     [TestClass()]
     public class TareasControllerTests
     {
+        private string ObtenerNombreDeUsuario()
+        {
+            return "a@a.com";
+        }
+
         [TestMethod()]
         public void GetConsultarTest_FiltroPorDefecto_LlamadoExitoso()
         {
             using (var controlador = new TareasController())
             {
-                var nombreDeUsuario = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+                var nombreDeUsuario = ObtenerNombreDeUsuario();
 
                 var filtro = new ConsultarBindingModel();
 
@@ -36,7 +41,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
         {
             using (var controlador = new TareasController())
             {
-                var nombreDeUsuario = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+                var nombreDeUsuario = ObtenerNombreDeUsuario();
 
                 var filtro1TodosLosAutores = new ConsultarBindingModel();
                 filtro1TodosLosAutores.Autoria = Autoria.TodosLosAutores;
@@ -57,7 +62,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
         {
             using (var controlador = new TareasController())
             {
-                var nombreDeUsuario = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+                var nombreDeUsuario = ObtenerNombreDeUsuario();
 
                 var filtro1TodosLosAutores = new ConsultarBindingModel();
                 filtro1TodosLosAutores.Autoria = Autoria.Propia;
@@ -67,7 +72,6 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
 
                 foreach (var tarea in tareas)
                 {
-                    //Por defecto solo se traen las tareas propias
                     Assert.IsTrue(EstadoTareaVM.Si == tarea.EstadoTarea);
                 }
             }
@@ -78,7 +82,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
         {
             using (var controlador = new TareasController())
             {
-                var nombreDeUsuario = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+                var nombreDeUsuario = ObtenerNombreDeUsuario();
 
                 var filtro1TodosLosAutores = new ConsultarBindingModel();
                 filtro1TodosLosAutores.Autoria = Autoria.Propia;
@@ -88,7 +92,6 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
 
                 foreach (var tarea in tareas)
                 {
-                    //Por defecto solo se traen las tareas propias
                     Assert.IsTrue(EstadoTareaVM.No == tarea.EstadoTarea);
                 }
             }
@@ -99,7 +102,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
         {
             using (var controlador = new TareasController())
             {
-                var nombreDeUsuario = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+                var nombreDeUsuario = ObtenerNombreDeUsuario();
 
                 var filtro1 = new ConsultarBindingModel();
                 filtro1.OrdenarFechaCreacion = OrdenarFechaCreacion.Asc;
@@ -110,8 +113,8 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
                 filtro2.OrdenarFechaCreacion = OrdenarFechaCreacion.Des;
 
                 var tareasFiltro2 = controlador.GetConsultar(filtro2, nombreDeUsuario);
-                
-                Assert.AreEqual(tareasFiltro1.Count(),tareasFiltro2.Count());
+
+                Assert.AreEqual(tareasFiltro1.Count(), tareasFiltro2.Count());
 
                 var tareasFiltro1ComoList = new List<TareaVM>(tareasFiltro1);
                 var tareasFiltro2ComoList = new List<TareaVM>(tareasFiltro2);
@@ -123,7 +126,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
                     Assert.AreEqual(tareasFiltro1ComoList[indice].FechaCreacion, tareasFiltro2ComoList[indiceInverso].FechaCreacion);
 
                 }
-                
+
             }
         }
     }

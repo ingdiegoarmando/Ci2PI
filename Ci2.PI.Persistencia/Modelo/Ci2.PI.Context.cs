@@ -35,7 +35,7 @@ namespace Ci2.PI.Persistencia.Modelo
         public virtual DbSet<TabUsuarioClaim> TabUsuarioClaim { get; set; }
         public virtual DbSet<TabUsuarioLogin> TabUsuarioLogin { get; set; }
     
-        public virtual ObjectResult<Nullable<long>> PraTabTareaAgregarOActualizar(Nullable<long> ci2TareaId, Nullable<System.DateTime> ci2FechaCreacion, string ci2Descripcion, Nullable<long> ci2EstadoTareaId, string ci2UsuarioId)
+        public virtual ObjectResult<Nullable<long>> PraTabTareaAgregarOActualizar(Nullable<long> ci2TareaId, Nullable<System.DateTime> ci2FechaCreacion, string ci2Descripcion, Nullable<long> ci2EstadoTareaId, string ci2UsuarioId, Nullable<System.DateTime> ci2FechaVencimiento)
         {
             var ci2TareaIdParameter = ci2TareaId.HasValue ?
                 new ObjectParameter("Ci2TareaId", ci2TareaId) :
@@ -57,7 +57,11 @@ namespace Ci2.PI.Persistencia.Modelo
                 new ObjectParameter("Ci2UsuarioId", ci2UsuarioId) :
                 new ObjectParameter("Ci2UsuarioId", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("PraTabTareaAgregarOActualizar", ci2TareaIdParameter, ci2FechaCreacionParameter, ci2DescripcionParameter, ci2EstadoTareaIdParameter, ci2UsuarioIdParameter);
+            var ci2FechaVencimientoParameter = ci2FechaVencimiento.HasValue ?
+                new ObjectParameter("Ci2FechaVencimiento", ci2FechaVencimiento) :
+                new ObjectParameter("Ci2FechaVencimiento", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("PraTabTareaAgregarOActualizar", ci2TareaIdParameter, ci2FechaCreacionParameter, ci2DescripcionParameter, ci2EstadoTareaIdParameter, ci2UsuarioIdParameter, ci2FechaVencimientoParameter);
         }
     
         public virtual ObjectResult<PraTabTareaConsultarPorId_Result> PraTabTareaConsultarPorId(Nullable<long> ci2TareaId)
@@ -81,6 +85,11 @@ namespace Ci2.PI.Persistencia.Modelo
         public virtual ObjectResult<PraTabTareaListar_Result> PraTabTareaListar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PraTabTareaListar_Result>("PraTabTareaListar");
+        }
+    
+        public virtual ObjectResult<PraTabTareaListarExtendidoV1_Result> PraTabTareaListarExtendidoV1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PraTabTareaListarExtendidoV1_Result>("PraTabTareaListarExtendidoV1");
         }
     }
 }

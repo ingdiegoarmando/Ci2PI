@@ -84,10 +84,10 @@ namespace Ci2.PI.ServicioWeb.Models
             {
                 Id = tarea.Ci2TareaId,
                 Descripcion = tarea.Ci2Descripcion,
-                EstadoTarea = estadoTarea,
+                EstadoTarea = estadoTarea,                
                 FechaCreacion = tarea.Ci2FechaCreacion,
                 FechaVencimiento = tarea.Ci2FechaCreacion,
-                Autor = autor,
+                Autor = tarea.Ci2NombreUsuario,
             };
         }
 

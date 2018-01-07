@@ -11,15 +11,17 @@ namespace Ci2.PI.Aplicacion.Repositorios
     {
         public long Ci2TareaId { get; set; }
         public System.DateTime Ci2FechaCreacion { get; set; }
+        public System.DateTime Ci2FechaVencimiento { get; set; }
         public string Ci2Descripcion { get; set; }
         public long Ci2EstadoTareaId { get; set; }
+        public string Ci2NombreEstadoTarea { get; set; }
         public string Ci2UsuarioId { get; set; }
         public string Ci2NombreUsuario { get; set; }
     }
 
     public class FiltroConsultarTarea
     {
-        public string UsuarioId { get; set; }
+        public string NombreUsuario { get; set; }
 
         public long EstadoId { get; set; }
     }
@@ -38,7 +40,7 @@ namespace Ci2.PI.Aplicacion.Repositorios
         #region Implementacion de IRepositorio        
         public void AgregarOActualizar(TabTarea entidad)
         {
-            var idTareaCreada = ContextoBD.PraTabTareaAgregarOActualizar(entidad.Ci2TareaId, entidad.Ci2FechaCreacion, entidad.Ci2Descripcion, entidad.Ci2EstadoTareaId, entidad.Ci2UsuarioId).SingleOrDefault();
+            var idTareaCreada = ContextoBD.PraTabTareaAgregarOActualizar(entidad.Ci2TareaId, entidad.Ci2FechaCreacion, entidad.Ci2Descripcion, entidad.Ci2EstadoTareaId, entidad.Ci2UsuarioId, entidad.Ci2FechaVencimiento).SingleOrDefault();
 
             if (entidad.Ci2TareaId == 0)
             {
@@ -60,6 +62,7 @@ namespace Ci2.PI.Aplicacion.Repositorios
                     Ci2FechaCreacion = resultadoBD.Ci2FechaCreacion,
                     Ci2TareaId = resultadoBD.Ci2TareaId,
                     Ci2UsuarioId = resultadoBD.Ci2UsuarioId,
+                    Ci2FechaVencimiento=resultadoBD.Ci2FechaVencimiento,
                 };
             }
             else
@@ -88,6 +91,7 @@ namespace Ci2.PI.Aplicacion.Repositorios
                     Ci2FechaCreacion = item.Ci2FechaCreacion,
                     Ci2TareaId = item.Ci2TareaId,
                     Ci2UsuarioId = item.Ci2UsuarioId,
+                    Ci2FechaVencimiento = item.Ci2FechaVencimiento,
                 }).ToList();
             }
 
@@ -97,16 +101,16 @@ namespace Ci2.PI.Aplicacion.Repositorios
 
         public IEnumerable<ResultadoTareaConsultarPorFiltro> ConsultarPorFiltro(FiltroConsultarTarea filtro)
         {
-            var consultaBD = Listar();
+            var consultaBD = ListarExtendidoV2();
 
             if (filtro.EstadoId != 0)
             {
                 consultaBD = consultaBD.Where(item => item.Ci2EstadoTareaId == filtro.EstadoId);
             }
 
-            if (filtro.UsuarioId != null)
+            if (filtro.NombreUsuario != null)
             {
-                consultaBD = consultaBD.Where(item => item.Ci2UsuarioId == filtro.UsuarioId);
+                consultaBD = consultaBD.Where(item => item.Ci2NombreUsuario == filtro.NombreUsuario);
             }
 
 
@@ -117,12 +121,14 @@ namespace Ci2.PI.Aplicacion.Repositorios
             {
                 resultado.Add(new ResultadoTareaConsultarPorFiltro()
                 {
-                    Ci2Descripcion = tarea.Ci2Descripcion,
-                    Ci2EstadoTareaId = tarea.Ci2EstadoTareaId,
-                    Ci2FechaCreacion = tarea.Ci2FechaCreacion,
-                    Ci2NombreUsuario = tarea.Ci2UsuarioId,
                     Ci2TareaId = tarea.Ci2TareaId,
-                    Ci2UsuarioId = tarea.Ci2UsuarioId,
+                    Ci2Descripcion = tarea.Ci2Descripcion,
+                    Ci2EstadoTareaId = tarea.Ci2EstadoTareaId, 
+                    Ci2NombreEstadoTarea=tarea.Ci2NombreEstadoTarea,                   
+                    Ci2FechaCreacion = tarea.Ci2FechaCreacion,
+                    Ci2UsuarioId = tarea.Ci2UsuarioId,   
+                    Ci2NombreUsuario=tarea.Ci2NombreUsuario,                 
+                    Ci2FechaVencimiento = tarea.Ci2FechaVencimiento,
                 });                
                 
             }
@@ -130,6 +136,26 @@ namespace Ci2.PI.Aplicacion.Repositorios
             return resultado;
         }
 
+        private IEnumerable<ResultadoTareaConsultarPorFiltro> ListarExtendidoV2()
+        {
+            var resultadoBaseDeDatos = ContextoBD.PraTabTareaListarExtendidoV1().ToList();
+            var listado = new List<ResultadoTareaConsultarPorFiltro>();
+            if (resultadoBaseDeDatos != null && resultadoBaseDeDatos.Count > 0)
+            {
+                listado = resultadoBaseDeDatos.Select(item => new ResultadoTareaConsultarPorFiltro()
+                {
+                    Ci2Descripcion = item.Ci2Descripcion,
+                    Ci2EstadoTareaId = item.Ci2EstadoTareaId.Value,
+                    Ci2NombreEstadoTarea = item.Ci2NombreEstadoTarea,
+                    Ci2FechaCreacion = item.Ci2FechaCreacion,
+                    Ci2TareaId = item.Ci2TareaId,
+                    Ci2UsuarioId = item.Ci2UsuarioId,
+                    Ci2NombreUsuario = item.Ci2NombreUsuario,
+                    Ci2FechaVencimiento = item.Ci2FechaVencimiento,
+                }).ToList();
+            }
 
+            return listado;
+        }
     }
 }

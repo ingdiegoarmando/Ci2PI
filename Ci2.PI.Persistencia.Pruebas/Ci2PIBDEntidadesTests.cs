@@ -14,12 +14,13 @@ namespace Ci2.PI.Persistencia.Modelo.Tests
         private TabTarea GenerarTarea()
         {
             var fecha = DateTime.Now;
-
+            var fechaVencimiento = fecha.AddDays(7);
             return new TabTarea()
             {
                 Ci2Descripcion = $"Algo interesante paso el {fecha}",
                 Ci2EstadoTareaId = 1,
                 Ci2FechaCreacion = fecha,
+                Ci2FechaVencimiento = fechaVencimiento,
                 Ci2UsuarioId = "852c89ca-b7a8-4423-84af-2f6fac9a4004",
             };
         }
@@ -28,7 +29,7 @@ namespace Ci2.PI.Persistencia.Modelo.Tests
         {
             using (var db = new Ci2PIBDEntidades())
             {
-                var id = db.PraTabTareaAgregarOActualizar(0, tarea.Ci2FechaCreacion, tarea.Ci2Descripcion, tarea.Ci2EstadoTareaId, tarea.Ci2UsuarioId).SingleOrDefault();
+                var id = db.PraTabTareaAgregarOActualizar(0, tarea.Ci2FechaCreacion, tarea.Ci2Descripcion, tarea.Ci2EstadoTareaId, tarea.Ci2UsuarioId,tarea.Ci2FechaVencimiento).SingleOrDefault();
 
                 return Convert.ToInt64(id);
             }
