@@ -31,7 +31,26 @@ namespace Ci2.PI.ServicioWeb.Models
 
         public EstadoTarea Estado { get; set; } = EstadoTarea.Todas;
 
-        public OrdenarFechaCreacion OrdenarFechaCreacion { get; set; } = OrdenarFechaCreacion.NoOrdenar;
+        public OrdenarFechaCreacion OrdenarFechaVencimiento { get; set; } = OrdenarFechaCreacion.NoOrdenar;
 
+    }
+
+
+    public class CrearBindingModel
+    {
+        public System.DateTime FechaCreacion { get; set; }
+        public System.DateTime FechaVencimiento { get; set; }
+        public string Descripcion { get; set; }
+        public EstadoTareaVM EstadoTarea { get; set; }        
+    }
+
+    public class ActualizarBindingModel : CrearBindingModel
+    {
+        public long Id { get; set; }
+    }
+
+    public class BorrarBindingModel
+    {
+        public long Id { get; set; }
     }
 }
