@@ -31,7 +31,7 @@ namespace Ci2.PI.ServicioWeb
             );
 
             //Custom ValueProvider
-            config.Services.Add(typeof(ValueProviderFactory), new NombreDeUsuarioActualValueProviderFactory());
+            config.Services.Add(typeof(ValueProviderFactory), new UsuarioActualValueProviderFactory());
         }
     }
 }

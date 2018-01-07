@@ -10,7 +10,7 @@ using System.Web.Http.ValueProviders;
 namespace Ci2.PI.ServicioWeb.Infraestructura.Binders
 {
 
-    public class NombreDeUsuarioActualValueProvider : IValueProvider
+    public class UsuarioActualValueProvider : IValueProvider
     {
         public const string PREFIJO_USUARIO_ACTUAL = "UsuarioActual";
         public const string NOMBRE_CAMPO_USUARIO_ACTUAL = "NombreDeUsuarioActual";
@@ -19,7 +19,7 @@ namespace Ci2.PI.ServicioWeb.Infraestructura.Binders
         private string nombreDeUsuarioActual;
         private string idDeUsuarioActual;
 
-        public NombreDeUsuarioActualValueProvider(HttpActionContext actionContext)
+        public UsuarioActualValueProvider(HttpActionContext actionContext)
         {
             //Este código es temporal y debe ser eliminado una vez se implemente sistema de autenticación.
             nombreDeUsuarioActual = "a@a.com";
@@ -56,11 +56,11 @@ namespace Ci2.PI.ServicioWeb.Infraestructura.Binders
         }
     }
 
-    public class NombreDeUsuarioActualValueProviderFactory : ValueProviderFactory
+    public class UsuarioActualValueProviderFactory : ValueProviderFactory
     {
         public override IValueProvider GetValueProvider(HttpActionContext actionContext)
         {
-            return new NombreDeUsuarioActualValueProvider(actionContext);
+            return new UsuarioActualValueProvider(actionContext);
         }
     }
 }

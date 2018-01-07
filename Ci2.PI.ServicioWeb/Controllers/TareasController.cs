@@ -17,7 +17,7 @@ namespace Ci2.PI.ServicioWeb.Controllers
     public class TareasController : Ci2PIApiController
     {
         [Route("Consultar")]
-        public IEnumerable<TareaVM> GetConsultar([FromUri]ConsultarBindingModel filtro, [ValueProvider(typeof(NombreDeUsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
+        public IEnumerable<TareaVM> GetConsultar([FromUri]ConsultarBindingModel filtro, [ValueProvider(typeof(UsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
         {
             var filtroBD = new FiltroConsultarTarea() { };
 
@@ -62,7 +62,7 @@ namespace Ci2.PI.ServicioWeb.Controllers
         }
 
         [Route("Crear")]
-        public TareaVM PostCrear([FromBody]CrearBindingModel tarea, [ValueProvider(typeof(NombreDeUsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
+        public TareaVM PostCrear([FromBody]CrearBindingModel tarea, [ValueProvider(typeof(UsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
         {
             var tareaBD = ConvertidosDeEntidades.ObtenerTareaBD(tarea);
             tareaBD.Ci2UsuarioId = usuarioActual.IdDeUsuarioActual;
@@ -76,7 +76,7 @@ namespace Ci2.PI.ServicioWeb.Controllers
         }
 
         [Route("Actualizar")]
-        public TareaVM PostActualizar([FromBody]ActualizarBindingModel tarea, [ValueProvider(typeof(NombreDeUsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
+        public TareaVM PostActualizar([FromBody]ActualizarBindingModel tarea, [ValueProvider(typeof(UsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
         {
             var tareaEnBD = UnidadDeTrabajo.TareaRepositorio.ConsultarPorId(tarea.Id);
 
@@ -98,7 +98,7 @@ namespace Ci2.PI.ServicioWeb.Controllers
         }
 
         [Route("Borrar")]
-        public void PostBorrar([FromBody]BorrarBindingModel tarea, [ValueProvider(typeof(NombreDeUsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
+        public void PostBorrar([FromBody]BorrarBindingModel tarea, [ValueProvider(typeof(UsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
         {
             var tareaEnBD = UnidadDeTrabajo.TareaRepositorio.ConsultarPorId(tarea.Id);
 
