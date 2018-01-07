@@ -37,7 +37,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
                 foreach (var tarea in tareas)
                 {
                     //Por defecto solo se traen las tareas propias
-                    Assert.IsTrue(nombreDeUsuario.Equals(tarea.Autor));
+                    Assert.IsTrue(nombreDeUsuario.NombreDeUsuarioActual.Equals(tarea.Autor));
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
                 {
                     int indiceInverso = tareasFiltro1ComoList.Count() - indice - 1;
 
-                    Assert.AreEqual(tareasFiltro1ComoList[indice].FechaCreacion, tareasFiltro2ComoList[indiceInverso].FechaCreacion);
+                    Assert.AreEqual(tareasFiltro1ComoList[indice].FechaVencimiento, tareasFiltro2ComoList[indiceInverso].FechaVencimiento);
 
                 }
 
