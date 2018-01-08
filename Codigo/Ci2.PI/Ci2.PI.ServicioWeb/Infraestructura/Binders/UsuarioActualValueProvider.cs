@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
+using Microsoft.AspNet.Identity;
 
 namespace Ci2.PI.ServicioWeb.Infraestructura.Binders
 {
@@ -21,9 +22,8 @@ namespace Ci2.PI.ServicioWeb.Infraestructura.Binders
 
         public UsuarioActualValueProvider(HttpActionContext actionContext)
         {
-            //Este código es temporal y debe ser eliminado una vez se implemente sistema de autenticación.
-            nombreDeUsuarioActual = "a@a.com";
-            idDeUsuarioActual = "852c89ca-b7a8-4423-84af-2f6fac9a4004";
+            nombreDeUsuarioActual =  actionContext.RequestContext.Principal.Identity.Name;
+            idDeUsuarioActual = actionContext.RequestContext.Principal.Identity.GetUserId<string>();
         }
 
         public bool EsUnCampoValido(string campo)

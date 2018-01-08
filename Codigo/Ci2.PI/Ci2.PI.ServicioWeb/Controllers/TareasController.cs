@@ -14,6 +14,7 @@ using System.Web.Http.ValueProviders;
 namespace Ci2.PI.ServicioWeb.Controllers
 {
     [RoutePrefix("Tareas")]
+    [Authorize]
     public class TareasController : Ci2PIApiController
     {
         [Route("Consultar")]
