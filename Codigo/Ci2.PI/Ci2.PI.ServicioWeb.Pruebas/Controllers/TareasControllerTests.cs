@@ -262,21 +262,35 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
         [TestMethod()]
         public void PostBorrarTest_LlammadoExitoso()
         {
+            TareaVM tareaCreada = null;
+
             using (var controlador = new TareasController())
             {
                 var usuarioAutor = ObtenerNombreDeUsuario();
 
                 var tarea = GenerarCrearBindingModel();
 
-                var tareasVM = controlador.PostCrear(tarea, usuarioAutor);
+                tareaCreada = controlador.PostCrear(tarea, usuarioAutor);
 
                 var tareaBBM = new BorrarBindingModel()
                 {
-                    Id = tareasVM.Id
+                    Id = tareaCreada.Id
                 };
 
                 controlador.PostBorrar(tareaBBM, usuarioAutor);
 
+               
+            }
+
+            using (var controlador = new TareasController())
+            {
+                var nombreDeUsuario = ObtenerNombreDeUsuario();
+
+                var filtro = new ConsultarBindingModel();
+
+                var tareas = controlador.GetConsultar(filtro, nombreDeUsuario);
+
+                Assert.IsFalse(tareas.Any(item => item.Id == tareaCreada.Id));
             }
         }
 

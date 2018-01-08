@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -46,6 +47,7 @@ namespace Ci2.PI.ServicioWeb.Models
 
     public class ActualizarBindingModel : CrearBindingModel
     {
+        [Required]
         public long Id { get; set; }
     }
 
