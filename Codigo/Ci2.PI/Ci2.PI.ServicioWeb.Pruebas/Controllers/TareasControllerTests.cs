@@ -230,7 +230,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
 
         [TestMethod()]
         [ExpectedException(typeof(HttpResponseException))]
-        public void PostActualizarTest_LlammadoFallido()
+        public void PostActualizarTest_ActualizarTareaDeOtroUsuario_LlammadoFallido()
         {
             using (var controlador = new TareasController())
             {
@@ -296,7 +296,7 @@ namespace Ci2.PI.ServicioWeb.Controllers.Tests
 
         [TestMethod()]
         [ExpectedException(typeof(HttpResponseException))]
-        public void PostBorrarTest_LlammadoFallido()
+        public void PostBorrarTest_BorrarTareaDeOtroUsuario_LlammadoFallido()
         {
             using (var controlador = new TareasController())
             {

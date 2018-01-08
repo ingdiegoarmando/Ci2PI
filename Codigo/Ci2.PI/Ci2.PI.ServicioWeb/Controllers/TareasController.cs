@@ -1,4 +1,5 @@
-﻿using Ci2.PI.Aplicacion.Repositorios;
+﻿using Ci2.PI.Aplicacion.Excepciones;
+using Ci2.PI.Aplicacion.Repositorios;
 using Ci2.PI.ServicioWeb.Entidades;
 using Ci2.PI.ServicioWeb.Infraestructura.Binders;
 using Ci2.PI.ServicioWeb.Models;
@@ -79,37 +80,48 @@ namespace Ci2.PI.ServicioWeb.Controllers
         [Route("Actualizar")]
         public TareaVM PostActualizar([FromBody]ActualizarBindingModel tarea, [ValueProvider(typeof(UsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
         {
-            var tareaEnBD = UnidadDeTrabajo.TareaRepositorio.ConsultarPorId(tarea.Id);
-
-            if (tareaEnBD.Ci2UsuarioId != usuarioActual.IdDeUsuarioActual)
+            try
             {
-                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "Solo se pueden modificar las tareas de su autoria" };
+                var tareaBD = ConvertidosDeEntidades.ObtenerTareaBD(tarea);
+                tareaBD.Ci2UsuarioId = usuarioActual.IdDeUsuarioActual;
+
+                UnidadDeTrabajo.TareaRepositorio.AgregarOActualizar(tareaBD);
+
+                var tareaResultante = ConvertidosDeEntidades.ObtenerTareaVM(tareaBD, usuarioActual.NombreDeUsuarioActual);
+
+                return tareaResultante;
+            }
+            catch (TareaNoAutorizadaException ex)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = ex.Message };
                 throw new HttpResponseException(msg);
             }
+            catch (Exception)
+            {
 
-            var tareaBD = ConvertidosDeEntidades.ObtenerTareaBD(tarea);
-            tareaBD.Ci2UsuarioId = usuarioActual.IdDeUsuarioActual;
-
-            UnidadDeTrabajo.TareaRepositorio.AgregarOActualizar(tareaBD);
-
-            var tareaResultante = ConvertidosDeEntidades.ObtenerTareaVM(tareaBD, usuarioActual.NombreDeUsuarioActual);
-            //tareaResultante.Autor = usuarioActual.NombreDeUsuarioActual;
-
-            return tareaResultante;
+                throw;
+            }
         }
 
         [Route("Borrar")]
         public void PostBorrar([FromBody]BorrarBindingModel tarea, [ValueProvider(typeof(UsuarioActualValueProviderFactory))] UsuarioActual usuarioActual)
         {
-            var tareaEnBD = UnidadDeTrabajo.TareaRepositorio.ConsultarPorId(tarea.Id);
 
-            if (tareaEnBD.Ci2UsuarioId != usuarioActual.IdDeUsuarioActual)
+            try
             {
-                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "Solo se pueden borrar las tareas de su autoria" };
-                throw new HttpResponseException(msg);
-            }            
+                UnidadDeTrabajo.TareaRepositorio.EliminarVerificandoAutoria(tarea.Id, usuarioActual.IdDeUsuarioActual);
 
-            UnidadDeTrabajo.TareaRepositorio.Eliminar(tarea.Id);            
+            }
+            catch (TareaNoAutorizadaException ex)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = ex.Message };
+                throw new HttpResponseException(msg);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

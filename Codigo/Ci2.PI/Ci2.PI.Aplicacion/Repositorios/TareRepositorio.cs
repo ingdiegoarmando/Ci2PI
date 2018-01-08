@@ -1,4 +1,5 @@
-﻿using Ci2.PI.Persistencia.Modelo;
+﻿using Ci2.PI.Aplicacion.Excepciones;
+using Ci2.PI.Persistencia.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,16 @@ namespace Ci2.PI.Aplicacion.Repositorios
         #region Implementacion de IRepositorio        
         public void AgregarOActualizar(TabTarea entidad)
         {
+            if (entidad.Ci2TareaId != 0)
+            {
+                var tareaActual = ConsultarPorId(entidad.Ci2TareaId);
+
+                if (tareaActual.Ci2UsuarioId != entidad.Ci2UsuarioId)
+                {
+                    throw new TareaNoAutorizadaException("Solo se pueden modificar las tareas de su autoria");
+                }
+            }
+
             var idTareaCreada = ContextoBD.PraTabTareaAgregarOActualizar(entidad.Ci2TareaId, entidad.Ci2FechaCreacion, entidad.Ci2Descripcion, entidad.Ci2EstadoTareaId, entidad.Ci2UsuarioId, entidad.Ci2FechaVencimiento).SingleOrDefault();
 
             if (entidad.Ci2TareaId == 0)
@@ -76,6 +87,18 @@ namespace Ci2.PI.Aplicacion.Repositorios
         {
             var idComoLong = Convert.ToInt64(id[0]);
             ContextoBD.PraTabTareaEliminar(idComoLong);
+        }
+
+        public void EliminarVerificandoAutoria(long id, string usuarioId) {
+
+            var tareaActual = ConsultarPorId(id);
+
+            if (tareaActual.Ci2UsuarioId != usuarioId)
+            {
+                throw new TareaNoAutorizadaException("Solo se pueden borrar las tareas de su autoria");
+            }
+            
+            Eliminar(id);
         }
 
         public IEnumerable<TabTarea> Listar()
