@@ -20,6 +20,8 @@ namespace Ci2.PI.Aplicacion
             get { return tareaRepositorio; }
             set { tareaRepositorio = value; }
         }
+
+        public UsuarioRepositorio UsuarioRepositorio { get; set; }
         #endregion
 
         #region Constructores
@@ -30,7 +32,8 @@ namespace Ci2.PI.Aplicacion
                 throw new ArgumentNullException("contextoBD no puede ser nulo");
             }
             this.contextoBD = contextoBD;
-            TareaRepositorio = new TareRepositorio(contextoBD);            
+            TareaRepositorio = new TareRepositorio(contextoBD);
+            UsuarioRepositorio = new UsuarioRepositorio(contextoBD);
 
         }
 

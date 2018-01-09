@@ -17,6 +17,11 @@ namespace Ci2.PI.ServicioWeb.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        {
+            return await GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie);
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

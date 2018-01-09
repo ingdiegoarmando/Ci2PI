@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\VS\wetransfer-de2778\Ci2.PI\Ci2.PI.Persistencia\Modelo\Ci2.PI.BD.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\VS\Ci2.PI\Codigo\Ci2.PI\Ci2.PI.Persistencia\Modelo\Ci2.PI.BD.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

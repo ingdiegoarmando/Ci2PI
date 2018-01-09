@@ -1,0 +1,92 @@
+﻿@using Ci2.PI.ServicioWeb.Models
+@model Ci2.PI.ServicioWeb.Models.UsuarioInicioViewModel
+
+@{
+    ViewBag.Title = "Gestión de Usuarios";
+}
+
+@section scripts
+    {
+    <script type="text/javascript">
+        var idObjetoABorrar;
+
+        $(function () {
+            $('#dialogo-borrar').dialog({
+                autoOpen: false, width: 400, resizable: false, modal: true,
+                buttons: {
+                    "Continuar": function () {
+                        $.post('@Url.Action("Eliminar", "Usuarios")', { id: idObjetoABorrar, __RequestVerificationToken: gettoken() }, function (data) {
+                            location.reload();
+                        }).fail(function (e) {
+                            //alert(JSON.stringify(e))
+                            alert("Se produjo un error, si el problema persiste por favor comuniquese con el administrador.");
+                            location.reload();
+                        });
+                        $(this).dialog("close");
+                    },
+                    "Cancelar": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+
+
+        function ConfirmacionDeBorrado(e) {
+            idObjetoABorrar = e;
+            //alert(JSON.stringify(e))
+            $('#dialogo-borrar').dialog('open');
+        }
+
+        function gettoken() {
+            var token = '@Html.AntiForgeryToken()';
+            token = $(token).val();
+            return token;
+        }
+    </script>
+}
+
+<h2>@ViewBag.Title</h2>
+
+@{
+    <div class="form-group">
+        <a href="@Url.Action("Registrar")" class="btn btn-primary btn-large fa fa-plus fa-lg" title="Agregar">Registrar un nuevo usuario</a>
+    </div>
+    var usuariosGrid = new WebGrid(Model.Usuarios,
+                                   canPage: Model.InformacionParaGenerarListado.RegistrosPorPagina > 0, rowsPerPage: Model.InformacionParaGenerarListado.RegistrosPorPagina, pageFieldName: "paginaUsuarios",
+                                   canSort: true, defaultSort: "UsuarioId", sortFieldName: "ordenamientoUsuarios", sortDirectionFieldName: "direccionOrdenamientoUsuarios"/*,
+                                   ajaxUpdateContainerId: "usuariosContenedor"*/);
+    <div id="usuariosContenedor">
+        @usuariosGrid.GetHtml(
+                                tableStyle: "table table-bordered table-striped tabla-basica-punto-laser",
+                                columns: usuariosGrid.Columns
+                                (
+                                    usuariosGrid.Column(columnName: "NombreUsuario", header: "Nombre de Usuario", style: "col-md-1"),
+                                    usuariosGrid.Column(columnName: "CorreoElectronico", header: "Correo Electronico", style: "col-md-1"),
+                                    usuariosGrid.Column(columnName: "NumeroTelefonico", header: "Telefono", style: "col-md-1"),
+                                     usuariosGrid.Column(columnName: "BloqueoActivado", header: "Bloqueo por intentos fallidos", style: "col-md-3"),
+                                    usuariosGrid.Column(columnName: "NumeroAccesosFallidos", header: "# Intentos fallidos", style: "col-md-1"),
+                                    usuariosGrid.Column(format:
+                                    @<div>
+                                        <div class="btn-toolbar btn-toolbar-centered" role="toolbar">
+                                            <div class="btn-group" role="group">
+                                                <a href="@Url.Action("Editar",new { Id = item.UsuarioId })" class="btn btn-primary btn-large fa fa-edit fa-x2" title="Editar"></a>
+                                            </div>
+                                            @if (item.UsuarioId != Model.UsuarioActualId)
+                                            {
+                                                <div class="btn-group" role="group">
+                                                    <a href="#" onclick="ConfirmacionDeBorrado('@item.UsuarioId');return false;" class="btn btn-primary btn-large fa fa-remove fa-x2" title="Eliminar"></a>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>,
+                                                        style: "col-md-5 text-center", header: "Acciones")
+                                )
+        )
+    </div>
+}
+
+<div id="dialogo-borrar" title="Confirmación">
+    <p> ¿Usted desea borrar este registro? </p>
+</div>

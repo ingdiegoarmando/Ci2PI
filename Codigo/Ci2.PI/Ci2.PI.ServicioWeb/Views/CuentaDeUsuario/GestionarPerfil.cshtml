@@ -1,0 +1,101 @@
+﻿@model Ci2.PI.ServicioWeb.Models.CuentaDeUsuarioGestionarPerfilViewModel
+
+@{
+    ViewBag.Title = "Gestión del perfil";
+}
+
+@section scripts
+{    
+
+    <script type="text/javascript">
+
+        $(function () {           
+
+            generarPopop('DialogoCambiarContrasena', 'FormularioCambiarContrasena', 'btoCambiarContrasena', '@Url.Action("CambiarContrasena", "CuentaDeUsuario")', gettoken());
+            
+        });
+
+        function gettoken() {
+            var token = '@Html.AntiForgeryToken()';
+            token = $(token).val();
+            return token;
+        }
+
+    </script>
+}
+<br />
+<br />
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="panel contenedor-formulario-pequeño-punto">
+            <div class="panel-heading">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-5">
+                            @Html.LabelFor(model => model.NombreDeUsuario)
+                        </div>
+                        <div class="col-md-5">
+                            @Html.DisplayFor(model => model.NombreDeUsuario, new { htmlAttributes = new { @readonly = "readonly" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-5">
+                            @Html.LabelFor(model => model.Contrasena)
+                        </div>
+                        <div class="col-md-5">
+                            <button id="btoCambiarContrasena" class="btn btn-primary btn-large fa fa-edit fa-x2" title="Editar" />
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="DialogoCambiarContrasena" title="Cambiar contraseña" style="display:none;">
+    <div id="CambiarContraseña">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "FormularioCambiarContrasena" }))
+        {
+            <div class="panel">
+                <div class="panel-heading">
+
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CambioDeContrasenaVM.ContrasenaAnterior)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.PasswordFor(model => model.CambioDeContrasenaVM.ContrasenaAnterior, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CambioDeContrasenaVM.ContrasenaAnterior, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CambioDeContrasenaVM.ContrasenaNueva)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.PasswordFor(model => model.CambioDeContrasenaVM.ContrasenaNueva, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CambioDeContrasenaVM.ContrasenaNueva, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CambioDeContrasenaVM.ContrasenaNuevaConfirmacion)
+                            </div>
+                            <div class="col-md-6">
+                                @Html.PasswordFor(model => model.CambioDeContrasenaVM.ContrasenaNuevaConfirmacion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CambioDeContrasenaVM.ContrasenaNuevaConfirmacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

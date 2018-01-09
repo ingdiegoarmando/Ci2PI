@@ -180,6 +180,27 @@
         </Function>
         <Function Name="PraTabTareaListar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner" />
         <Function Name="PraTabTareaListarExtendidoV1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner" />
+        <Function Name="PraTabUsuarioAgregarOActualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner">
+          <Parameter Name="Ci2UsuarioId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ci2CorreoElectronico" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ci2CorreoElectronicoConfirmado" Type="bit" Mode="In" />
+          <Parameter Name="Ci2PasswordHash" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Ci2SecurityStamp" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Ci2NumeroTelefonico" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Ci2NumeroTelefonicoConfirmado" Type="bit" Mode="In" />
+          <Parameter Name="Ci2AutenticacionDosEtapasActivado" Type="bit" Mode="In" />
+          <Parameter Name="Ci2FechaBloqueoUtc" Type="datetime" Mode="In" />
+          <Parameter Name="Ci2BloqueoActivado" Type="bit" Mode="In" />
+          <Parameter Name="Ci2NumeroAccesosFallidos" Type="int" Mode="In" />
+          <Parameter Name="Ci2NombreUsuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="PraTabUsuarioConsultarPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner">
+          <Parameter Name="Ci2UsuarioId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="PraTabUsuarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner">
+          <Parameter Name="Ci2UsuarioId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="PraTabUsuarioListar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="db_ci2pi_owner" />
         <EntityContainer Name="Ci2PIBDModeloStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="db_ci2pi_owner" store:Type="Tables" />
           <EntitySet Name="TabEstadoTarea" EntityType="Self.TabEstadoTarea" Schema="db_ci2pi_owner" store:Type="Tables" />
@@ -400,6 +421,27 @@
           </FunctionImport>
           <FunctionImport Name="PraTabTareaListar" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabTareaListar_Result)" />
           <FunctionImport Name="PraTabTareaListarExtendidoV1" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabTareaListarExtendidoV1_Result)" />
+          <FunctionImport Name="PraTabUsuarioAgregarOActualizar" ReturnType="Collection(String)">
+            <Parameter Name="Ci2UsuarioId" Mode="In" Type="String" />
+            <Parameter Name="Ci2CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="Ci2CorreoElectronicoConfirmado" Mode="In" Type="Boolean" />
+            <Parameter Name="Ci2PasswordHash" Mode="In" Type="String" />
+            <Parameter Name="Ci2SecurityStamp" Mode="In" Type="String" />
+            <Parameter Name="Ci2NumeroTelefonico" Mode="In" Type="String" />
+            <Parameter Name="Ci2NumeroTelefonicoConfirmado" Mode="In" Type="Boolean" />
+            <Parameter Name="Ci2AutenticacionDosEtapasActivado" Mode="In" Type="Boolean" />
+            <Parameter Name="Ci2FechaBloqueoUtc" Mode="In" Type="DateTime" />
+            <Parameter Name="Ci2BloqueoActivado" Mode="In" Type="Boolean" />
+            <Parameter Name="Ci2NumeroAccesosFallidos" Mode="In" Type="Int32" />
+            <Parameter Name="Ci2NombreUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PraTabUsuarioConsultarPorId" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabUsuarioConsultarPorId_Result)">
+            <Parameter Name="Ci2UsuarioId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PraTabUsuarioEliminar">
+            <Parameter Name="Ci2UsuarioId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PraTabUsuarioListar" ReturnType="Collection(Ci2.PI.BD.Modelo.PraTabUsuarioListar_Result)" />
         </EntityContainer>
         <ComplexType Name="PraTabTareaConsultarPorId_Result">
           <Property Type="Int64" Name="Ci2TareaId" Nullable="false" />
@@ -426,6 +468,34 @@
           <Property Type="String" Name="Ci2UsuarioId" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Ci2NombreUsuario" Nullable="true" MaxLength="256" />
           <Property Type="DateTime" Name="Ci2FechaVencimiento" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="PraTabUsuarioConsultarPorId_Result">
+          <Property Type="String" Name="Ci2UsuarioId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Ci2CorreoElectronico" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="Ci2CorreoElectronicoConfirmado" Nullable="false" />
+          <Property Type="String" Name="Ci2PasswordHash" Nullable="true" />
+          <Property Type="String" Name="Ci2SecurityStamp" Nullable="true" />
+          <Property Type="String" Name="Ci2NumeroTelefonico" Nullable="true" />
+          <Property Type="Boolean" Name="Ci2NumeroTelefonicoConfirmado" Nullable="false" />
+          <Property Type="Boolean" Name="Ci2AutenticacionDosEtapasActivado" Nullable="false" />
+          <Property Type="DateTime" Name="Ci2FechaBloqueoUtc" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Ci2BloqueoActivado" Nullable="false" />
+          <Property Type="Int32" Name="Ci2NumeroAccesosFallidos" Nullable="false" />
+          <Property Type="String" Name="Ci2NombreUsuario" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="PraTabUsuarioListar_Result">
+          <Property Type="String" Name="Ci2UsuarioId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Ci2CorreoElectronico" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="Ci2CorreoElectronicoConfirmado" Nullable="false" />
+          <Property Type="String" Name="Ci2PasswordHash" Nullable="true" />
+          <Property Type="String" Name="Ci2SecurityStamp" Nullable="true" />
+          <Property Type="String" Name="Ci2NumeroTelefonico" Nullable="true" />
+          <Property Type="Boolean" Name="Ci2NumeroTelefonicoConfirmado" Nullable="false" />
+          <Property Type="Boolean" Name="Ci2AutenticacionDosEtapasActivado" Nullable="false" />
+          <Property Type="DateTime" Name="Ci2FechaBloqueoUtc" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Ci2BloqueoActivado" Nullable="false" />
+          <Property Type="Int32" Name="Ci2NumeroAccesosFallidos" Nullable="false" />
+          <Property Type="String" Name="Ci2NombreUsuario" Nullable="false" MaxLength="256" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -553,6 +623,44 @@
                 <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
                 <ScalarProperty Name="Ci2NombreUsuario" ColumnName="Ci2NombreUsuario" />
                 <ScalarProperty Name="Ci2FechaVencimiento" ColumnName="Ci2FechaVencimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PraTabUsuarioAgregarOActualizar" FunctionName="Ci2.PI.BD.Modelo.Store.PraTabUsuarioAgregarOActualizar" />
+          <FunctionImportMapping FunctionImportName="PraTabUsuarioConsultarPorId" FunctionName="Ci2.PI.BD.Modelo.Store.PraTabUsuarioConsultarPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ci2.PI.BD.Modelo.PraTabUsuarioConsultarPorId_Result">
+                <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
+                <ScalarProperty Name="Ci2CorreoElectronico" ColumnName="Ci2CorreoElectronico" />
+                <ScalarProperty Name="Ci2CorreoElectronicoConfirmado" ColumnName="Ci2CorreoElectronicoConfirmado" />
+                <ScalarProperty Name="Ci2PasswordHash" ColumnName="Ci2PasswordHash" />
+                <ScalarProperty Name="Ci2SecurityStamp" ColumnName="Ci2SecurityStamp" />
+                <ScalarProperty Name="Ci2NumeroTelefonico" ColumnName="Ci2NumeroTelefonico" />
+                <ScalarProperty Name="Ci2NumeroTelefonicoConfirmado" ColumnName="Ci2NumeroTelefonicoConfirmado" />
+                <ScalarProperty Name="Ci2AutenticacionDosEtapasActivado" ColumnName="Ci2AutenticacionDosEtapasActivado" />
+                <ScalarProperty Name="Ci2FechaBloqueoUtc" ColumnName="Ci2FechaBloqueoUtc" />
+                <ScalarProperty Name="Ci2BloqueoActivado" ColumnName="Ci2BloqueoActivado" />
+                <ScalarProperty Name="Ci2NumeroAccesosFallidos" ColumnName="Ci2NumeroAccesosFallidos" />
+                <ScalarProperty Name="Ci2NombreUsuario" ColumnName="Ci2NombreUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PraTabUsuarioEliminar" FunctionName="Ci2.PI.BD.Modelo.Store.PraTabUsuarioEliminar" />
+          <FunctionImportMapping FunctionImportName="PraTabUsuarioListar" FunctionName="Ci2.PI.BD.Modelo.Store.PraTabUsuarioListar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Ci2.PI.BD.Modelo.PraTabUsuarioListar_Result">
+                <ScalarProperty Name="Ci2UsuarioId" ColumnName="Ci2UsuarioId" />
+                <ScalarProperty Name="Ci2CorreoElectronico" ColumnName="Ci2CorreoElectronico" />
+                <ScalarProperty Name="Ci2CorreoElectronicoConfirmado" ColumnName="Ci2CorreoElectronicoConfirmado" />
+                <ScalarProperty Name="Ci2PasswordHash" ColumnName="Ci2PasswordHash" />
+                <ScalarProperty Name="Ci2SecurityStamp" ColumnName="Ci2SecurityStamp" />
+                <ScalarProperty Name="Ci2NumeroTelefonico" ColumnName="Ci2NumeroTelefonico" />
+                <ScalarProperty Name="Ci2NumeroTelefonicoConfirmado" ColumnName="Ci2NumeroTelefonicoConfirmado" />
+                <ScalarProperty Name="Ci2AutenticacionDosEtapasActivado" ColumnName="Ci2AutenticacionDosEtapasActivado" />
+                <ScalarProperty Name="Ci2FechaBloqueoUtc" ColumnName="Ci2FechaBloqueoUtc" />
+                <ScalarProperty Name="Ci2BloqueoActivado" ColumnName="Ci2BloqueoActivado" />
+                <ScalarProperty Name="Ci2NumeroAccesosFallidos" ColumnName="Ci2NumeroAccesosFallidos" />
+                <ScalarProperty Name="Ci2NombreUsuario" ColumnName="Ci2NombreUsuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

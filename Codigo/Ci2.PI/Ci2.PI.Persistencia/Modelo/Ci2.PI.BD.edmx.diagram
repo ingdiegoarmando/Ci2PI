@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="39b6484e9fbd4f5e8b724766acfe1961" Name="Diagram1">
+      <Diagram DiagramId="e1617095fe26489ebeec00207f0214fd" Name="Diagram1">
         <EntityTypeShape EntityType="Ci2.PI.BD.Modelo.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Ci2.PI.BD.Modelo.TabEstadoTarea" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Ci2.PI.BD.Modelo.TabRol" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />

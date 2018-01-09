@@ -50,10 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Excepciones\NombreDeUsuarioEnUsoException.cs" />
     <Compile Include="Excepciones\TareaNoAutorizadaException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\IRepositorio.cs" />
     <Compile Include="Repositorios\TareRepositorio.cs" />
+    <Compile Include="Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="UnidadDeTrabajo.cs" />
   </ItemGroup>
   <ItemGroup>

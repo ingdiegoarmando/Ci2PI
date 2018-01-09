@@ -91,5 +91,81 @@ namespace Ci2.PI.Persistencia.Modelo
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PraTabTareaListarExtendidoV1_Result>("PraTabTareaListarExtendidoV1");
         }
+    
+        public virtual ObjectResult<string> PraTabUsuarioAgregarOActualizar(string ci2UsuarioId, string ci2CorreoElectronico, Nullable<bool> ci2CorreoElectronicoConfirmado, string ci2PasswordHash, string ci2SecurityStamp, string ci2NumeroTelefonico, Nullable<bool> ci2NumeroTelefonicoConfirmado, Nullable<bool> ci2AutenticacionDosEtapasActivado, Nullable<System.DateTime> ci2FechaBloqueoUtc, Nullable<bool> ci2BloqueoActivado, Nullable<int> ci2NumeroAccesosFallidos, string ci2NombreUsuario)
+        {
+            var ci2UsuarioIdParameter = ci2UsuarioId != null ?
+                new ObjectParameter("Ci2UsuarioId", ci2UsuarioId) :
+                new ObjectParameter("Ci2UsuarioId", typeof(string));
+    
+            var ci2CorreoElectronicoParameter = ci2CorreoElectronico != null ?
+                new ObjectParameter("Ci2CorreoElectronico", ci2CorreoElectronico) :
+                new ObjectParameter("Ci2CorreoElectronico", typeof(string));
+    
+            var ci2CorreoElectronicoConfirmadoParameter = ci2CorreoElectronicoConfirmado.HasValue ?
+                new ObjectParameter("Ci2CorreoElectronicoConfirmado", ci2CorreoElectronicoConfirmado) :
+                new ObjectParameter("Ci2CorreoElectronicoConfirmado", typeof(bool));
+    
+            var ci2PasswordHashParameter = ci2PasswordHash != null ?
+                new ObjectParameter("Ci2PasswordHash", ci2PasswordHash) :
+                new ObjectParameter("Ci2PasswordHash", typeof(string));
+    
+            var ci2SecurityStampParameter = ci2SecurityStamp != null ?
+                new ObjectParameter("Ci2SecurityStamp", ci2SecurityStamp) :
+                new ObjectParameter("Ci2SecurityStamp", typeof(string));
+    
+            var ci2NumeroTelefonicoParameter = ci2NumeroTelefonico != null ?
+                new ObjectParameter("Ci2NumeroTelefonico", ci2NumeroTelefonico) :
+                new ObjectParameter("Ci2NumeroTelefonico", typeof(string));
+    
+            var ci2NumeroTelefonicoConfirmadoParameter = ci2NumeroTelefonicoConfirmado.HasValue ?
+                new ObjectParameter("Ci2NumeroTelefonicoConfirmado", ci2NumeroTelefonicoConfirmado) :
+                new ObjectParameter("Ci2NumeroTelefonicoConfirmado", typeof(bool));
+    
+            var ci2AutenticacionDosEtapasActivadoParameter = ci2AutenticacionDosEtapasActivado.HasValue ?
+                new ObjectParameter("Ci2AutenticacionDosEtapasActivado", ci2AutenticacionDosEtapasActivado) :
+                new ObjectParameter("Ci2AutenticacionDosEtapasActivado", typeof(bool));
+    
+            var ci2FechaBloqueoUtcParameter = ci2FechaBloqueoUtc.HasValue ?
+                new ObjectParameter("Ci2FechaBloqueoUtc", ci2FechaBloqueoUtc) :
+                new ObjectParameter("Ci2FechaBloqueoUtc", typeof(System.DateTime));
+    
+            var ci2BloqueoActivadoParameter = ci2BloqueoActivado.HasValue ?
+                new ObjectParameter("Ci2BloqueoActivado", ci2BloqueoActivado) :
+                new ObjectParameter("Ci2BloqueoActivado", typeof(bool));
+    
+            var ci2NumeroAccesosFallidosParameter = ci2NumeroAccesosFallidos.HasValue ?
+                new ObjectParameter("Ci2NumeroAccesosFallidos", ci2NumeroAccesosFallidos) :
+                new ObjectParameter("Ci2NumeroAccesosFallidos", typeof(int));
+    
+            var ci2NombreUsuarioParameter = ci2NombreUsuario != null ?
+                new ObjectParameter("Ci2NombreUsuario", ci2NombreUsuario) :
+                new ObjectParameter("Ci2NombreUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PraTabUsuarioAgregarOActualizar", ci2UsuarioIdParameter, ci2CorreoElectronicoParameter, ci2CorreoElectronicoConfirmadoParameter, ci2PasswordHashParameter, ci2SecurityStampParameter, ci2NumeroTelefonicoParameter, ci2NumeroTelefonicoConfirmadoParameter, ci2AutenticacionDosEtapasActivadoParameter, ci2FechaBloqueoUtcParameter, ci2BloqueoActivadoParameter, ci2NumeroAccesosFallidosParameter, ci2NombreUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<PraTabUsuarioConsultarPorId_Result> PraTabUsuarioConsultarPorId(string ci2UsuarioId)
+        {
+            var ci2UsuarioIdParameter = ci2UsuarioId != null ?
+                new ObjectParameter("Ci2UsuarioId", ci2UsuarioId) :
+                new ObjectParameter("Ci2UsuarioId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PraTabUsuarioConsultarPorId_Result>("PraTabUsuarioConsultarPorId", ci2UsuarioIdParameter);
+        }
+    
+        public virtual int PraTabUsuarioEliminar(string ci2UsuarioId)
+        {
+            var ci2UsuarioIdParameter = ci2UsuarioId != null ?
+                new ObjectParameter("Ci2UsuarioId", ci2UsuarioId) :
+                new ObjectParameter("Ci2UsuarioId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PraTabUsuarioEliminar", ci2UsuarioIdParameter);
+        }
+    
+        public virtual ObjectResult<PraTabUsuarioListar_Result> PraTabUsuarioListar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PraTabUsuarioListar_Result>("PraTabUsuarioListar");
+        }
     }
 }

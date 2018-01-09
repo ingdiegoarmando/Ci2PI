@@ -13,5 +13,30 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
+}
+
+/* Genera el borde del formulario*/
+.contenedor-formulario-por-defecto-punto {
+    display: block;
+    border-radius: 4px;
+    border: 1px #ddd solid;
+    background-color: #fff;
+}
+/*Ajusta el tamaño de los lables dentro del formulario*/
+div.contenedor-formulario-por-defecto-punto label {
+    font-weight: 500;
+}
+
+/* Genera el borde del formulario. Versión Pequeña*/
+.contenedor-formulario-pequeño-punto {
+    display: block;
+    border-radius: 4px;
+    border: 1px #ddd solid;
+    background-color: #fff;
+    max-width: 500px;
+}
+/*Ajusta el tamaño de los lables dentro del formulario Versión Pequeña*/
+div.contenedor-formulario-pequeño-punto label {
+    font-weight: 500;
 }

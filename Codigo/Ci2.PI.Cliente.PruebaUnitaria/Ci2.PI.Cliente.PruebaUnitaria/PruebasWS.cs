@@ -33,11 +33,13 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
 
         public const string URL_BASE_BORRAR = URL_WS_TAREA_BASE + "/borrar";
 
-        public const string NOMBRE_USUARIO_POR_DEFECTO = "a@a.com";
+        public const string NOMBRE_USUARIO_POR_DEFECTO_1 = "aa";
+
+        public const string NOMBRE_USUARIO_POR_DEFECTO_ALTERNATIVO = "bb";
 
         public string ObtenerTokenUsuarioPorDefecto()
         {
-            return ObtenerToken(NOMBRE_USUARIO_POR_DEFECTO, "!Qaz12");
+            return ObtenerToken(NOMBRE_USUARIO_POR_DEFECTO_1, "!Qaz12");
         }
 
         public string ObtenerToken(string nombreUsuario, string contraseña)
@@ -126,7 +128,7 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
             foreach (var tarea in tareas)
             {
                 //Por defecto solo se traen las tareas propias
-                Assert.IsTrue(NOMBRE_USUARIO_POR_DEFECTO.Equals(tarea.Autor), tarea.Autor);
+                Assert.IsTrue(NOMBRE_USUARIO_POR_DEFECTO_1.Equals(tarea.Autor), tarea.Autor);
             }
         }
 
@@ -255,7 +257,7 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
             Assert.IsTrue(tarea.Id > 0, $"tarea.Id : {tarea.Id}");
             Assert.AreEqual(tarea.Descripcion, descripcion);
             Assert.AreEqual(ObtenerFechaAjustadaComoString(tarea.FechaVencimiento), ObtenerFechaAjustadaComoString(fechaVencimiento));
-            Assert.AreEqual(tarea.Autor, NOMBRE_USUARIO_POR_DEFECTO);
+            Assert.AreEqual(tarea.Autor, NOMBRE_USUARIO_POR_DEFECTO_1);
 
         }
 
@@ -332,7 +334,7 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
             Assert.AreEqual(tareaCreada.Id, tareaActualizada.Id);
             Assert.AreEqual(tareaCreada.Descripcion, tareaActualizada.Descripcion);
             Assert.AreNotEqual(tareaCreada.FechaVencimiento, tareaActualizada.FechaVencimiento);
-            Assert.AreEqual(tareaCreada.Autor, NOMBRE_USUARIO_POR_DEFECTO);
+            Assert.AreEqual(tareaCreada.Autor, NOMBRE_USUARIO_POR_DEFECTO_1);
 
         }
 
@@ -353,7 +355,7 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
             parametrosCrear.Add("FechaCreacion", fechaCreacionComoString);
             parametrosCrear.Add("FechaVencimiento", fechaVencimientoComoString);
 
-            string nombreUsuario1 = "a@a.com";
+            string nombreUsuario1 = NOMBRE_USUARIO_POR_DEFECTO_1;
             string token1 = ObtenerToken(nombreUsuario1, "!Qaz12");
             string respuestaFormatoJsonCrear = ObtenerTextoFormatoJsonDeAccederALaUrlConPost(URL_BASE_CREAR, parametrosCrear, token1);
             var tareaCreada = ObtenerObjetoDesdeUnTextoConFormatoJson<ResultadoWSConsultar>(respuestaFormatoJsonCrear);
@@ -369,7 +371,7 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
             parametrosActualizar.Add("FechaCreacion", ObtenerFechaAjustadaComoString(tareaCreada.FechaCreacion));
             parametrosActualizar.Add("FechaVencimiento", ObtenerFechaAjustadaComoString(nuevaFechaVencimiento));
 
-            string nombreUsuario2 = "b@b.com";
+            string nombreUsuario2 = NOMBRE_USUARIO_POR_DEFECTO_ALTERNATIVO;
             string token2 = ObtenerToken(nombreUsuario2, "!Qaz12");
             try
             {
@@ -477,13 +479,13 @@ namespace Ci2.PI.Cliente.PruebaUnitaria
             parametrosCrear.Add("FechaCreacion", fechaCreacionComoString);
             parametrosCrear.Add("FechaVencimiento", fechaVencimientoComoString);
 
-            string nombreUsuario1 = "a@a.com";
+            string nombreUsuario1 = NOMBRE_USUARIO_POR_DEFECTO_1;
             string token1 = ObtenerToken(nombreUsuario1, "!Qaz12");
 
             string respuestaFormatoJsonCrear = ObtenerTextoFormatoJsonDeAccederALaUrlConPost(URL_BASE_CREAR, parametrosCrear, token1);
             var tareaCreada = ObtenerObjetoDesdeUnTextoConFormatoJson<ResultadoWSConsultar>(respuestaFormatoJsonCrear);
 
-            string nombreUsuario2 = "b@b.com";
+            string nombreUsuario2 = NOMBRE_USUARIO_POR_DEFECTO_ALTERNATIVO;
             string token2 = ObtenerToken(nombreUsuario2, "!Qaz12");
 
             var parametrosBorrar = new Dictionary<string, string>();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ci2.PI.ServicioWeb.Entidades;
+using Ci2.PI.ServicioWeb.Infraestructura.Binders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,7 @@ namespace Ci2.PI.ServicioWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.Add(typeof(UsuarioActualMVC), new UsuarioActualMVCModelBinder());
         }
     }
 }

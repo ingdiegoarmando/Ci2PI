@@ -1,0 +1,51 @@
+﻿@model Ci2.PI.ServicioWeb.Models.CuentaDeUsuarioIniciarSesionViewModel
+
+@{
+    ViewBag.Title = "Iniciar Sesión";
+}
+
+
+@using (Html.BeginForm("IniciarSesion", "CuentaDeUsuario", FormMethod.Post, new { autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UrlARetornar)
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-offset-4 col-md-8">
+            <div class="panel contenedor-formulario-pequeño-punto">
+                <div class="panel-heading">
+                    <h2>@ViewBag.Title</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.NombreDeUsuario)
+                            </div>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.NombreDeUsuario, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NombreDeUsuario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.Contrasena)
+                            </div>
+                            <div class="col-md-8">
+                                @Html.PasswordFor(model => model.Contrasena, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <input type="submit" value="Iniciar" class="btn btn-primary btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,8 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+    <li><a href="@Url.Action("Index","Usuarios",new { area = "" })">Gestion de usuarios</a> </li>
+    
+}

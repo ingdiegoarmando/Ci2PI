@@ -1,0 +1,121 @@
+﻿@model Ci2.PI.ServicioWeb.Models.UsuarioEditarViewModel
+
+@{
+    ViewBag.Title = "Editar Usuario";
+}
+
+@using (Html.BeginForm("Editar", "Usuarios", new { UsuarioId = Model.UsuarioId }, FormMethod.Post, new { autocomplete = "off" }))
+{    
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <br />
+            <br />
+            <div class="panel contenedor-formulario-por-defecto-punto">
+                <div class="panel-heading">
+                    <h2>@ViewBag.Title</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.UsuarioId)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.UsuarioId, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.NombreUsuario)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.NombreUsuario, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.NombreUsuario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.CorreoElectronico)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.CorreoElectronico, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.CorreoElectronicoConfirmado)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.CorreoElectronicoConfirmado, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CorreoElectronicoConfirmado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.NumeroTelefonico)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.NumeroTelefonico, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NumeroTelefonico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.NumeroTelefonicoConfirmado)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.NumeroTelefonicoConfirmado, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NumeroTelefonicoConfirmado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.AutenticacionDosEtapasActivado)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.AutenticacionDosEtapasActivado, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.AutenticacionDosEtapasActivado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.FechaBloqueoUtc)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.FechaBloqueoUtc, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FechaBloqueoUtc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.BloqueoActivado)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.BloqueoActivado, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.BloqueoActivado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.NumeroAccesosFallidos)
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(model => model.NumeroAccesosFallidos, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NumeroAccesosFallidos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    @Html.ActionLink("Volver a la lista", "Index", "Usuarios", null, new { @class = "btn btn-default" })
+                    <input type="submit" value="Guardar" class="btn btn-primary btn-default" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
